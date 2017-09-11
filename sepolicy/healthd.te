@@ -1,0 +1,2 @@
+allow healthd kernel:system module_request;
+allow healthd healthd:capability { dac_override dac_read_search sys_nice };

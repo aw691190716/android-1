@@ -1,0 +1,4 @@
+type kgsl_device, dev_type, mlstrustedobject;
+type msm_pcm_device, dev_type;
+type mmcblk_device, dev_type;
+type oncrpc_device, dev_type;

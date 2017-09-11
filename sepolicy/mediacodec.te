@@ -1,0 +1,2 @@
+allow mediacodec kernel:system module_request;
+allow mediacodec rootfs:lnk_file getattr;

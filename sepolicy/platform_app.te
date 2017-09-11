@@ -1,0 +1,2 @@
+allow platform_app kgsl_device:chr_file { read write };
+allow platform_app kgsl_sysfs:file { open getattr };

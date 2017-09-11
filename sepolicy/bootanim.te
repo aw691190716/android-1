@@ -1,0 +1,4 @@
+allow bootanim kernel:system module_request;
+allow bootanim rootfs:lnk_file getattr;
+allow bootanim proc_net:file { read open getattr };
+allow bootanim kgsl_sysfs:file { open getattr read write };

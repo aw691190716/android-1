@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+    <remote name="github"
+            fetch="git://github.com"
+            review="https://review.lineageos.org"
+            revision="refs/heads/cm-14.1"
+            sync-c="true"
+            sync-j="4" />
+
+    <remote name="msm7x30"
+            fetch="git://github.com"
+            review="https://review.msm7x30.org"
+            revision="refs/heads/cm-14.1"
+            sync-c="true"
+            sync-j="4" />
+
+    <remote name="extras"
+            fetch="git://github.com"
+            sync-c="true"
+            sync-j="4" />
+
+    <remove-project name="platform/bionic" />
+    <remove-project name="platform/bootable/recovery" />
+    <remove-project name="platform/external/e2fsprogs" />
+    <remove-project name="platform/external/f2fs-tools" />
+    <remove-project name="platform/external/fsck_msdos" />
+    <remove-project name="platform/external/gptfdisk" />
+    <remove-project name="platform/external/ipsec-tools" />
+    <remove-project name="platform/external/libselinux" />
+    <remove-project name="platform/external/mksh" />
+    <remove-project name="platform/external/tinyalsa" />
+    <remove-project name="platform/external/tinycompress" />
+    <remove-project name="platform/external/toybox" />
+    <remove-project name="platform/external/wpa_supplicant_8" />
+    <remove-project name="platform/external/zlib" />
+    <remove-project name="platform/frameworks/av" />
+    <remove-project name="platform/frameworks/native" />
+    <remove-project name="platform/hardware/libhardware_legacy" />
+    <remove-project name="platform/hardware/ril" />
+    <remove-project name="platform/system/core" />
+    <remove-project name="platform/system/extras" />
+    <remove-project name="platform/system/media" />
+    <remove-project name="platform/system/sepolicy" />
+    <remove-project name="platform/system/vold" />
+
+    <project path="bionic" name="LineageOS/android_bionic" groups="pdk" remote="github" revision="5848aaf5c8a41ea1f8ffb5f48209e434a8df246d"/>
+    <project path="bootable/recovery" name="LineageOS/android_bootable_recovery" groups="pdk" remote="github" />
+    <project path="external/e2fsprogs" name="LineageOS/android_external_e2fsprogs" groups="pdk" remote="github" />
+    <project path="external/f2fs-tools" name="LineageOS/android_external_f2fs-tools" groups="pdk" remote="github" />
+    <project path="external/fsck_msdos" name="LineageOS/android_external_fsck_msdos" groups="pdk-cw-fs,pdk-fs" remote="github" />
+    <project path="external/gptfdisk" name="LineageOS/android_external_gptfdisk" groups="pdk-fs" remote="github" />
+    <project path="external/ipsec-tools" name="LineageOS/android_external_ipsec-tools" groups="pdk-cw-fs,pdk-fs" remote="github" revision="8116a3ddb08abf5f996a12c11b389dc814714f84"/>
+    <project path="external/libselinux" name="LineageOS/android_external_libselinux" groups="pdk" remote="github" />
+    <project path="external/mksh" name="LineageOS/android_external_mksh" groups="pdk" remote="github" />
+    <project path="external/tinyalsa" name="LineageOS/android_external_tinyalsa" groups="pdk" remote="github" />
+    <project path="external/tinycompress" name="LineageOS/android_external_tinycompress" groups="pdk" remote="github" />
+    <project path="external/toybox" name="LineageOS/android_external_toybox" groups="pdk" remote="github" />
+    <project path="external/wpa_supplicant_8" name="LineageOS/android_external_wpa_supplicant_8" groups="pdk" remote="github" />
+    <project path="external/zlib" name="LineageOS/android_external_zlib" groups="pdk" remote="github" />
+    <project path="frameworks/av" name="LineageOS/android_frameworks_av" groups="pdk" remote="github" revision="eb594c4b2c6f230250d737af9ab1796d3d4c1ebf"/>
+    <project path="frameworks/native" name="LineageOS/android_frameworks_native" groups="pdk" remote="github" revision="3510b6f096d927aa97490bd54f74e6e7b8ca2c27"/>
+    <project path="hardware/libhardware_legacy" name="LineageOS/android_hardware_libhardware_legacy" groups="pdk" remote="github" />
+    <project path="hardware/ril" name="LineageOS/android_hardware_ril" groups="pdk" remote="github" revision="1faedb0174303695a89020277f13a68096675301"/>
+    <project path="system/core" name="LineageOS/android_system_core" groups="pdk" remote="github" />
+    <project path="system/extras" name="LineageOS/android_system_extras" groups="pdk" remote="github" revision="b76b4409cb203ff3e244643b81735a1084803202"/>
+    <project path="system/media" name="LineageOS/android_system_media" groups="pdk" remote="github" />
+    <project path="system/sepolicy" name="LineageOS/android_system_sepolicy" groups="pdk" remote="github" />
+    <project path="system/vold" name="LineageOS/android_system_vold" groups="pdk" remote="github" revision="25ea9c383abd988258e34ae932dbcb5593b12d84"/>
+
+    <project path="external/exfat" name="LineageOS/android_external_exfat" remote="github" />
+    <project path="external/ffmpeg" name="LineageOS/android_external_ffmpeg" remote="github" />
+    <project path="external/fuse" name="LineageOS/android_external_fuse" remote="github" />
+    <project path="external/libtar" name="LineageOS/android_external_libtar" remote="github" />
+    <project path="external/ntfs-3g" name="LineageOS/android_external_ntfs-3g" remote="github" />
+    <project path="external/pigz" name="LineageOS/android_external_pigz" remote="github" />
+    <project path="external/stagefright-plugins" name="LineageOS/android_external_stagefright-plugins" remote="github" />
+    <project path="external/yaffs2" name="LineageOS/android_external_yaffs2" remote="github" />
+    <project path="hardware/ti/wlan" name="LineageOS/android_hardware_ti_wlan" remote="github" />
+    <project path="hardware/ti/wpan" name="LineageOS/android_hardware_ti_wpan" remote="github" />
+    <project path="system/extras/su" name="LineageOS/android_system_extras_su" remote="github" />
+
+    <project path="external/ant-wireless/ant_native" name="LineageOS/android_external_ant-wireless_ant_native" remote="github" />
+    <project path="external/ant-wireless/ant_service" name="LineageOS/android_external_ant-wireless_ant_service" remote="github" />
+    <project path="external/ant-wireless/antradio-library" name="LineageOS/android_external_ant-wireless_antradio-library" remote="github" />
+    <project path="hardware/qcom/bt-caf" name="LineageOS/android_hardware_qcom_bt" groups="qcom" revision="cm-14.1-caf" remote="github" />
+    <project path="hardware/qcom/fm" name="LineageOS/android_hardware_qcom_fm" groups="qcom,qcom_fm" remote="github" revision="aff061afa755e06a234b72bf70daf2d9c848f0c7"/>
+    <project path="hardware/qcom/wlan-caf" name="LineageOS/android_hardware_qcom_wlan" groups="qcom_wlan" revision="cm-14.1-caf" remote="github" />
+    <project path="hardware/ril-caf" name="LineageOS/android_hardware_ril" groups="pdk" remote="github" revision="f9c57249cf90f8d596246b6ef4274b14349b5032"/>
+    <project path="system/qcom" name="LineageOS/android_system_qcom" groups="qcom" remote="github" />
+
+    <project name="LineageOS/android_external_sony_boringssl-compat" path="external/sony/boringssl-compat" remote="github" />
+    <project name="LineageOS/android_external_stlport" path="external/stlport" remote="github" />
+    <project name="LineageOS/android_hardware_sony_DASH" path="hardware/sony/DASH" remote="github" />
+    <project name="LineageOS/android_device_qcom_sepolicy" path="device/qcom/sepolicy" remote="github" />
+    <project name="LineageOS/android_vendor_cm" path="vendor/cm" remote="github" />
+
+    <project name="LegacyXperia/android_device_semc_msm7x30-common" path="device/semc/msm7x30-common" remote="msm7x30" />
+    <project name="LegacyXperia/android_device_semc_mogami-common" path="device/semc/mogami-common" remote="msm7x30" />
+    <project name="LegacyXperia/android_device_semc_mango" path="device/semc/mango" remote="msm7x30" />
+    <project name="LegacyXperia/android_kernel_semc_msm7x30" path="kernel/semc/msm7x30" remote="msm7x30" revision="2c2b9c9010293e5ad51a6263c3b568434b9d0996"/>
+    <project name="LegacyXperia/proprietary_vendor_semc" path="vendor/semc" remote="msm7x30" />
+
+    <project name="msm7x30/android_device_qcom_msm7x30-common" path="device/qcom/msm7x30-common" remote="msm7x30" />
+    <project name="msm7x30/android_hardware_qcom_audio" path="hardware/qcom/audio-caf/msm7x30" remote="msm7x30" revision="cm-14.1-caf-7x30" />
+    <project name="msm7x30/android_hardware_qcom_display" path="hardware/qcom/display-caf/msm7x30" remote="msm7x30" revision="cm-14.1-caf-7x30" />
+    <project name="msm7x30/android_hardware_qcom_media" path="hardware/qcom/media-caf/msm7x30" remote="msm7x30" revision="cm-14.1-caf-7x30" />
+
+    <project name="aw691190716/android_vendor_extras" path="vendor/google" remote="extras" revision="mango" >
+        <copyfile src="manifests/manifest.xml" dest=".repo/local_manifests/local_manifest.xml" />
+    </project>
+</manifest>

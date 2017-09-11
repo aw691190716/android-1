@@ -1,0 +1,2 @@
+allow fsck kernel:system module_request;
+allow fsck mmcblk_device:blk_file { getattr read write open ioctl };

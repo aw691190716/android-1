@@ -1,0 +1,4 @@
+allow system_app shell_data_file:dir search;
+allow system_app kgsl_device:chr_file { read write };
+allow system_app kgsl_sysfs:file { open getattr };
+allow system_app logpersistd_logging_prop:file { read open getattr };

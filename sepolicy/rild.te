@@ -1,0 +1,5 @@
+allow rild lib_system_file:file { execmod read open getattr };
+allow rild system_data_file:dir { write add_name create };
+allow rild system_data_file:sock_file { create write };
+allow rild oncrpc_device:chr_file { read write open ioctl };
+allow rild diag_device:chr_file { read write open ioctl };

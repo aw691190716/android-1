@@ -1,0 +1,5 @@
+allow domain kgsl_device:chr_file rw_file_perms;
+allow domain msm_pcm_device:chr_file rw_file_perms;
+allow domain kgsl_sysfs:file read;
+allow domain oncrpc_device:chr_file rw_file_perms;
+allow { domain -untrusted_app } diag_device:chr_file rw_file_perms;

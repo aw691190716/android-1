@@ -1,0 +1,61 @@
+diff --git a/include/hardware/hwcomposer.h b/include/hardware/hwcomposer.h
+index 61218bb..28877e1 100644
+--- a/include/hardware/hwcomposer.h
++++ b/include/hardware/hwcomposer.h
+@@ -286,6 +286,11 @@ typedef struct hwc_layer_1 {
+              * their origin is the top-left corner.
+              */
+             hwc_region_t surfaceDamage;
++
++#ifdef QTI_BSP
++            /* Color for Dim Layer */
++            hwc_color_t color;
++#endif
+         };
+     };
+ 
+diff --git a/include/hardware/hwcomposer_defs.h b/include/hardware/hwcomposer_defs.h
+index 18b30bc..dc1eceb 100644
+--- a/include/hardware/hwcomposer_defs.h
++++ b/include/hardware/hwcomposer_defs.h
+@@ -254,15 +254,26 @@ enum {
+ enum {
+     HWC_DISPLAY_PRIMARY     = 0,
+     HWC_DISPLAY_EXTERNAL    = 1,    // HDMI, DP, etc.
++#ifdef QTI_BSP
++    HWC_DISPLAY_TERTIARY    = 2,
++    HWC_DISPLAY_VIRTUAL     = 3,
++
++    HWC_NUM_PHYSICAL_DISPLAY_TYPES = 3,
++    HWC_NUM_DISPLAY_TYPES          = 4,
++#else
+     HWC_DISPLAY_VIRTUAL     = 2,
+ 
+     HWC_NUM_PHYSICAL_DISPLAY_TYPES = 2,
+     HWC_NUM_DISPLAY_TYPES          = 3,
++#endif
+ };
+ 
+ enum {
+     HWC_DISPLAY_PRIMARY_BIT     = 1 << HWC_DISPLAY_PRIMARY,
+     HWC_DISPLAY_EXTERNAL_BIT    = 1 << HWC_DISPLAY_EXTERNAL,
++#ifdef QTI_BSP
++    HWC_DISPLAY_TERTIARY_BIT    = 1 << HWC_DISPLAY_TERTIARY,
++#endif
+     HWC_DISPLAY_VIRTUAL_BIT     = 1 << HWC_DISPLAY_VIRTUAL,
+ };
+ 
+diff --git a/include/hardware/power.h b/include/hardware/power.h
+index bd8216e..5cdd3ac 100644
+--- a/include/hardware/power.h
++++ b/include/hardware/power.h
+@@ -65,7 +65,8 @@ typedef enum {
+     POWER_HINT_SUSTAINED_PERFORMANCE = 0x00000006,
+     POWER_HINT_VR_MODE = 0x00000007,
+     POWER_HINT_LAUNCH = 0x00000008,
+-    POWER_HINT_DISABLE_TOUCH = 0x00000009
++    POWER_HINT_DISABLE_TOUCH = 0x00000009,
++    POWER_HINT_CPU_BOOST    = 0x00000110
+ } power_hint_t;
+ 
+ typedef enum {

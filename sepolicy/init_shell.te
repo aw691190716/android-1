@@ -1,0 +1,6 @@
+allow qti_init_shell system_file:file execmod;
+allow qti_init_shell wifi_data_file:file getattr;
+allow qti_init_shell smem_log_device:chr_file { read write open ioctl };
+allow qti_init_shell diag_device:chr_file { read write open ioctl };
+allow qti_init_shell fm_data_file: file create_file_perms;
+allow qti_init_shell gpu_device:chr_file getattr;

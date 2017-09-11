@@ -1,0 +1,3 @@
+allow qmuxd system_data_file:dir { write add_name create remove_name };
+allow qmuxd system_data_file:sock_file { create write unlink getattr };
+allow qmuxd data_test_data_file:sock_file { getattr unlink };

@@ -1,0 +1,3 @@
+allow ueventd kernel:system module_request;
+allow ueventd wifi_data_file:dir search;
+allow ueventd wifi_data_file:file { read open getattr };

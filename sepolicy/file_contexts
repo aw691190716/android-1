@@ -1,0 +1,8 @@
+/dev/kgsl-[0-9]d0       u:object_r:kgsl_device:s0
+/dev/msm_pcm_out       u:object_r:msm_pcm_device:s0
+/sys/devices/platform/kgsl-[0-9]d0.0/kgsl/kgsl-[0-9]d0/gpuclk       u:object_r:kgsl_sysfs:s0
+/dev/block/mmcblk0p1       u:object_r:mmcblk_device:s0
+/system/lib/libril-qc-1.so       u:object_r:lib_system_file:s0
+/system/lib/liboncrpc.so       u:object_r:lib_system_file:s0
+/system/lib/libmiscta.so       u:object_r:lib_system_file:s0
+/dev/oncrpc/*       u:object_r:oncrpc_device:s0
