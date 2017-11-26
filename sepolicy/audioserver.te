@@ -1,6 +1,0 @@
-allow audioserver kernel:system module_request;
-allow audioserver rootfs:lnk_file getattr;
-allow audioserver proc_net:file { read open getattr };
-allow audioserver sysfs:file { read open getattr };
-allow audioserver msm_pcm_device:chr_file { read write };
-allow audioserver audioserver:capability sys_nice;

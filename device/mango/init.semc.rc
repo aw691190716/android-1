@@ -1,0 +1,160 @@
+# Common init for semc msm7x30 devices
+
+import /init.semc.usb.rc
+import /init.board.rc
+import /init.cm.rc
+
+on early-init
+    mount debugfs debugfs /sys/kernel/debug
+    chmod 666 /proc/cmdline
+
+on init
+    # Support legacy paths
+    symlink /sdcard /mnt/sdcard
+    symlink /sdcard /storage/sdcard0
+
+    # Preload the BoringSSL compat symbols wrapper
+    export LD_PRELOAD "/system/lib/libboringssl-compat.so"
+
+    export LD_SHIM_LIBS /system/lib/hw/camera.vendor.semc.so|libshim_camera.so
+
+on early-boot
+    # Offline charging
+    exec /system/bin/chargemon
+
+    # set RLIMIT_MEMLOCK to 64MB
+    setrlimit 8 67108864 67108864
+
+on boot
+    # Radio fix
+    mkdir /data/radio 0775 radio radio
+    mkdir /data/radio/log 0775 radio radio
+
+    # To prevent out of order acknowledgements from making
+    # connection tracking to treat them as not belonging to
+    # the connection they belong to.
+    # Otherwise, a weird issue happens in which some long
+    # connections on high-throughput links get dropped when
+    # an ack packet comes out of order
+    write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
+
+    chown root system /proc/net/ip_conntrack
+
+    # LED
+    chown system system /sys/class/leds/red/trigger
+    chmod 660 /sys/class/leds/red/trigger
+    chown system system /sys/class/leds/green/trigger
+    chmod 660 /sys/class/leds/green/trigger
+    chown system system /sys/class/leds/blue/trigger
+    chmod 660 /sys/class/leds/blue/trigger
+
+    # Vibrator intensity tuning
+    chown system system /sys/class/timed_output/vibrator/voltage_level
+
+    # Display color calibration
+    chown system system /sys/class/graphics/fb0/kcal
+
+    # Adaptive backlight
+    chown root system /sys/devices/platform/mddi_auo_s6d05a1_hvga/dbc_ctrl
+    chmod 0664 /sys/devices/platform/mddi_auo_s6d05a1_hvga/dbc_ctrl
+    chown root system /sys/devices/platform/mddi_hitachi_r61529_hvga/dbc_ctrl
+    chmod 0664 /sys/devices/platform/mddi_hitachi_r61529_hvga/dbc_ctrl
+    chown root system /sys/devices/platform/mddi_sii_r61529_hvga/dbc_ctrl
+    chmod 0664 /sys/devices/platform/mddi_sii_r61529_hvga/dbc_ctrl
+    chown root system /sys/devices/platform/mddi_sony_s6d05a1_hvga/dbc_ctrl
+    chmod 0664 /sys/devices/platform/mddi_sony_s6d05a1_hvga/dbc_ctrl
+
+    # I/O scheduler
+    chown system system /sys/block/mtdblock0/queue/scheduler
+    chmod 0664 /sys/block/mtdblock0/queue/scheduler
+    chown system system /sys/block/mtdblock1/queue/scheduler
+    chmod 0664 /sys/block/mtdblock1/queue/scheduler
+    chown system system /sys/block/mtdblock2/queue/scheduler
+    chmod 0664 /sys/block/mtdblock2/queue/scheduler
+
+    # Fix permissions for bma150 (accelerometer). Can be at different adresses.
+    chown system system /sys/devices/i2c-0/0-0038/rate
+    chown system system /sys/devices/i2c-4/4-0038/rate
+
+    class_start default
+
+    # USB host support
+    mkdir /dev/bus 0771 system system
+    mkdir /dev/bus/usb 0771 system system
+
+    chmod 0660 /sys/devices/platform/msm_hsusb/gadget/lun1/file
+    chown usb usb /sys/devices/platform/msm_hsusb/gadget/lun1/file
+    chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
+    chown system system /sys/devices/platform/msm_hsusb/gadget/wakeup
+
+    # Flash storage isn't a good entropy source, and only causes locking
+    # overhead in the kernel. Turn it off.
+    write /sys/block/mmcblk0/queue/add_random 0
+
+    # Read only 1 page at a time
+    write /proc/sys/vm/page-cluster 0
+
+on fs
+    write /sys/block/zram0/comp_algorithm lz4
+
+    mount_all /fstab.semc
+    swapon_all /fstab.semc
+
+on post-fs-data
+    setprop vold.post_fs_data_done 1
+
+on property:init.svc.wpa_supplicant=stopped
+    stop dhcpcd
+
+service port-bridge /system/bin/port-bridge /dev/smd0 /dev/ttyGS0 &
+    class main
+    disabled
+    oneshot
+
+service qmuxd /system/bin/qmuxd
+    class core
+    user radio
+    group radio audio bluetooth gps
+
+service netmgrd /system/bin/netmgrd -E
+    class core
+
+on property:ro.use_data_netmgrd=false
+    # netmgr not supported on specific target
+    stop netmgrd
+
+service akmd8975 /system/bin/akmd8975
+    class main
+
+service hw_config /system/bin/sh /system/etc/hw_config.sh
+    class main
+    user root
+    oneshot
+
+on property:init.svc.bootanim=running
+    # Clear splash screen (blank and unblank)
+    write /sys/class/graphics/fb0/blank 1
+    write /sys/class/graphics/fb0/blank 0
+
+# Configure IO scheduler
+on property:sys.io.scheduler=*
+    write /sys/block/mtdblock0/queue/scheduler ${sys.io.scheduler}
+    write /sys/block/mtdblock1/queue/scheduler ${sys.io.scheduler}
+    write /sys/block/mtdblock2/queue/scheduler ${sys.io.scheduler}
+
+# Set slice_idle to 0 for CFQ
+on property:sys.io.scheduler=cfq
+    write /sys/block/mtdblock0/queue/iosched/slice_idle 0
+    write /sys/block/mtdblock1/queue/iosched/slice_idle 0
+    write /sys/block/mtdblock2/queue/iosched/slice_idle 0
+
+# Set slice_idle to 0 for BFQ
+on property:sys.io.scheduler=bfq
+    write /sys/block/mtdblock0/queue/iosched/slice_idle 0
+    write /sys/block/mtdblock1/queue/iosched/slice_idle 0
+    write /sys/block/mtdblock2/queue/iosched/slice_idle 0
+
+on property:service.bootanim.exit=1
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq "1017600"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq "122880"

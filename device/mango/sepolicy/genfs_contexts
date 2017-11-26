@@ -1,0 +1,5 @@
+genfscon proc /asound/card0/state u:object_r:proc_audiod:s0
+genfscon proc /sys/vm/dirty_ratio  u:object_r:proc_dirty_ratio:s0
+genfscon fuseblk / u:object_r:fuseblk:s0
+genfscon exfat / u:object_r:exfat:s0
+genfscon ntfs / u:object_r:ntfs:s0

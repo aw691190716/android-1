@@ -1,0 +1,3 @@
+allow gatekeeperd kernel:system module_request;
+# allow gatekeeperd to open firmware images (ex. kmota)
+r_dir_file(gatekeeperd, firmware_file)

@@ -1,3 +1,0 @@
-type kgsl_sysfs, fs_type, sysfs_type, mlstrustedobject;
-type cmd_system_file, file_type;
-type lib_system_file, system_lib_file_type, fs_type;

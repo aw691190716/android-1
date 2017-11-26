@@ -1,3 +1,0 @@
-allow priv_app kernel:system module_request;
-allow priv_app kgsl_device:chr_file { read write };
-allow priv_app kgsl_sysfs:file { open getattr };

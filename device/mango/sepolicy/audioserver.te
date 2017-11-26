@@ -1,0 +1,46 @@
+allow audioserver kernel:system module_request;
+allow audioserver rootfs:lnk_file getattr;
+allow audioserver proc_net:file { read open getattr };
+allow audioserver sysfs:file { read open getattr };
+allow audioserver msm_pcm_device:chr_file { read write };
+allow audioserver audioserver:capability sys_nice;
+#access to perflock
+allow audioserver mpctl_socket:dir r_dir_perms;
+unix_socket_send(audioserver, mpctl, mpdecision)
+unix_socket_connect(audioserver, mpctl, mpdecision)
+
+# access to perflock
+allow audioserver mpctl_socket:dir r_dir_perms;
+unix_socket_send(audioserver, mpctl, perfd)
+unix_socket_connect(audioserver, mpctl, perfd)
+
+#debugfs access to audio
+userdebug_or_eng(`
+typeattribute audioserver qti_debugfs_domain;
+#allow audioserver debugfs:dir r_dir_perms;
+#allow audioserver debugfs:file rw_file_perms;
+')
+# Allow audioserver to create socket files for audio arbitration
+allow audioserver audio_data_file:sock_file { create setattr unlink };
+allow audioserver audio_data_file:dir remove_name;
+
+# Allow audioserver to read sysfs dir and sysfs_thermal files for speaker protection
+allow audioserver sysfs:dir r_dir_perms;
+allow audioserver sysfs_thermal:file r_file_perms;
+
+# Allow audioserver to access sysfs nodes
+allow audioserver sysfs:file rw_file_perms;
+userdebug_or_eng(`
+  diag_use(audioserver)
+')
+
+#Rules for audioserver to talk to peripheral manager
+use_per_mgr(audioserver);
+
+# DOLBY_START
+allow audioserver activity_service:service_manager find;
+set_prop(audioserver, dolby_prop)
+# DOLBY_END
+
+# for thermal sock files
+unix_socket_connect(audioserver, thermal, thermal-engine)

@@ -1,0 +1,50 @@
+diff --git a/core/binary.mk b/core/binary.mk
+index 7b22903..367e27c 100644
+--- a/core/binary.mk
++++ b/core/binary.mk
+@@ -1373,7 +1373,7 @@ my_illegal_flags := -w
+ my_cflags := $(filter-out $(my_illegal_flags),$(my_cflags))
+ my_cppflags := $(filter-out $(my_illegal_flags),$(my_cppflags))
+ my_conlyflags := $(filter-out $(my_illegal_flags),$(my_conlyflags))
+-
++-include $(TOPDIR)vendor/*/build/core/binary.mk
+ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_YACCFLAGS := $(LOCAL_YACCFLAGS)
+ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_ASFLAGS := $(my_asflags)
+ $(LOCAL_INTERMEDIATE_TARGETS): PRIVATE_CONLYFLAGS := $(my_conlyflags)
+diff --git a/core/combo/select.mk b/core/combo/select.mk
+index df12e7e..e741ed8 100644
+--- a/core/combo/select.mk
++++ b/core/combo/select.mk
+@@ -44,6 +44,6 @@ $(combo_var_prefix)EXECUTABLE_SUFFIX :=
+ $(combo_var_prefix)SHLIB_SUFFIX := .so
+ $(combo_var_prefix)JNILIB_SUFFIX := $($(combo_var_prefix)SHLIB_SUFFIX)
+ $(combo_var_prefix)STATIC_LIB_SUFFIX := .a
+-
++-include $(TOPDIR)vendor/*/build/core/combo/select.mk
+ # Now include the combo for this specific target.
+ include $(BUILD_COMBOS)/$(combo_target)$(combo_os_arch).mk
+diff --git a/core/dynamic_binary.mk b/core/dynamic_binary.mk
+index 91fd271..f101c88 100644
+--- a/core/dynamic_binary.mk
++++ b/core/dynamic_binary.mk
+@@ -61,7 +61,7 @@ endif
+ ifeq ($(LOCAL_MODULE_CLASS),EXECUTABLES)
+   my_pack_module_relocations := false
+ endif
+-
++-include $(TOPDIR)vendor/*/build/core/dynamic_binary.mk
+ # TODO (dimitry): Relocation packer is not yet available for darwin
+ ifneq ($(HOST_OS),linux)
+   my_pack_module_relocations := false
+diff --git a/core/envsetup.mk b/core/envsetup.mk
+index 6cfb6a1..2f52351 100644
+--- a/core/envsetup.mk
++++ b/core/envsetup.mk
+@@ -155,6 +155,7 @@ ifneq ($(words $(board_config_mk)),1)
+   $(error Multiple board config files for TARGET_DEVICE $(TARGET_DEVICE): $(board_config_mk))
+ endif
+ include $(board_config_mk)
++-include $(TOPDIR)vendor/*/build/core/board_config.mk
+ ifeq ($(TARGET_ARCH),)
+   $(error TARGET_ARCH not defined by board config: $(board_config_mk))
+ endif

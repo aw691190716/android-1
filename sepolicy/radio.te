@@ -1,3 +1,0 @@
-allow radio shell_data_file:dir search;
-allow radio kgsl_sysfs:file { open getattr };
-allow radio system_app_data_file:dir getattr;

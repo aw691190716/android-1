@@ -1,0 +1,24 @@
+allow domain kgsl_device:chr_file rw_file_perms;
+allow domain msm_pcm_device:chr_file rw_file_perms;
+allow domain kgsl_sysfs:file read;
+allow domain oncrpc_device:chr_file rw_file_perms;
+allow { domain -untrusted_app } diag_device:chr_file rw_file_perms;
+allow domain rootfs:lnk_file getattr;
+ifelse(shipping_build, `true', ,
+  neverallow * {fs_type -contextmount_type }:filesystem relabelto;
+)
+r_dir_file(domain, sysfs_socinfo);
+r_dir_file(domain, sysfs_esoc);
+r_dir_file(domain, sysfs_ssr);
+
+dontaudit domain kernel:system module_request;
+
+# Allow all domains read access to sysfs_thermal
+r_dir_file(domain, sysfs_thermal);
+allow domain block_device:dir { search getattr }; 
+allow domain block_device:blk_file getattr;
+allow domain cache_block_device:blk_file getattr;
+allow domain userdata_block_device:blk_file getattr;
+
+allow domain persist_file:dir getattr;
+allow domain persist_block_device:blk_file getattr;

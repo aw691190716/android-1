@@ -1,0 +1,56 @@
+allow init kernel:system module_request;
+allow init tmpfs:lnk_file create;
+allow init ram_device:blk_file write;
+allow init init:capability sys_module;
+allow init input_device:chr_file { write ioctl };
+allow init system_data_file:sock_file write;
+allow init init:netlink_route_socket { create bind read setopt getattr write };
+allow init graphics_device:chr_file write;
+allow init init:netlink_socket { create bind write setopt getattr read };
+allow init init:packet_socket { create bind write read };
+allow init property_socket:sock_file write;
+allow init su_exec:file getattr;
+allow init lib_system_file:file { getattr execmod };
+# Adding allow rule for search on /fuse
+allow init fuse:dir { search mounton };
+allow init self:capability sys_module;
+allow init {
+    adsprpcd_file
+    cache_file
+    persist_file
+    storage_file
+}:dir mounton;
+allow init kmsg_device:chr_file write;
+
+#Allow triggering IPA FWs loading
+allow init ipa_dev:chr_file write;
+
+#For insmod to search module key for signature verification
+allow init kernel:key search;
+
+#For sdcard
+allow init tmpfs:lnk_file create_file_perms;
+
+#Certain domains needs LD_PRELOAD passed from init
+#allow it for most domain. Do not honor LD_PRELOAD
+#for lmkd
+allow init { domain -lmkd }:process noatsecure;
+
+#For configfs file permission
+allow init configfs:dir r_dir_perms;
+allow init configfs:file { rw_file_perms link };
+allow init configfs:lnk_file create_file_perms;
+
+#Allow init to mount non-hlos partitions in A/B builds
+allow init firmware_file:dir { mounton };
+allow init bt_firmware_file:dir { mounton };
+
+#dontaudit non configfs usb denials
+dontaudit init sysfs:dir write;
+# Allow formatting userdata or cache partitions
+allow init block_device:dir search;
+allow init userdata_block_device:blk_file rw_file_perms;
+allow init cache_block_device:blk_file rw_file_perms;
+
+# Allow init to send class_* trigger events
+allow init property_socket:sock_file write;

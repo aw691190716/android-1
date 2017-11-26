@@ -1,0 +1,13 @@
+# For Bluetooth
+allow dumpstate bluetooth_data_file:dir search;
+allow dumpstate bluetooth_logs_data_file:dir r_dir_perms;
+allow dumpstate bluetooth_logs_data_file:file r_file_perms;
+
+# Permit output of IPSec transform state.
+allow dumpstate self:netlink_xfrm_socket { create_socket_perms nlmsg_read };
+
+# For prefetcher to read themes
+allow dumpstate fuse:dir r_dir_perms;
+allow dumpstate fuse:file r_file_perms;
+allow dumpstate media_rw_data_file:dir search;
+allow dumpstate wcnss_service_exec:file rx_file_perms;

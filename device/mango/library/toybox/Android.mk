@@ -1,0 +1,9 @@
+LOCAL_PATH := $(call my-dir)
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES := toybox_init
+LOCAL_MODULE := toybox_init
+LOCAL_MODULE_STEM := toybox
+LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
+LOCAL_MODULE_PATH := $(PRODUCT_OUT)/utilities
+LOCAL_UNSTRIPPED_PATH := $(PRODUCT_OUT)/symbols/utilities
+include $(BUILD_PREBUILT)

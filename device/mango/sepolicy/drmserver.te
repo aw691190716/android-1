@@ -1,0 +1,6 @@
+allow drmserver kernel:system module_request;
+#Address denial logs for drm server accessing firmware file
+r_dir_file(drmserver, firmware_file)
+
+#Address denial logs for drm server accessing qseecom driver
+allow drmserver tee_device:chr_file rw_file_perms;

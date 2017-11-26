@@ -1,2 +1,0 @@
-allow untrusted_app sysfs:file read;
-allow untrusted_app kgsl_sysfs:file { read open getattr };

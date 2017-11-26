@@ -10,7 +10,7 @@ unset envf
 
 function finds()
 {
-    find . -name .repo -prune -o -name .git -prune -o -name out -prune -o -type f -name "*" \
+    find . -name .repo -prune -o -name .git -prune -o -name out -prune -o -name .ccache -prune -o -type f -name "*" \
         -exec grep --color -n "$@" {} +
 }
 
@@ -32,6 +32,7 @@ function mka() {
 }
 
 function build() {
+    croot
     export BUILD_NUMBER=$(date +%Y%m%d)
     local start=`date '+%Y-%m-%d-%H-%M'`
     mkdir -p $OUT_DIR/log
@@ -39,6 +40,9 @@ function build() {
     if [ x"$2" == x ]; then
         mka otapackage 2>&1|tee $OUT_DIR/log/log-$start-.txt
     else
+        if [ x"$3" == x"dellog" ]; then
+            rm -rf $OUT_DIR/log/log-*
+        fi
         mka $2 2>&1|tee $OUT_DIR/log/log-$start-.txt
     fi
     local end=`date '+%Y-%m-%d-%H-%M'`
@@ -51,16 +55,14 @@ function buildshutdown() {
 }
 
 function applypath() {
-    local cherries=(AOSP_486857)
-         cherries+=(AOSP_486859)
-         cherries+=(LX_1725)
-         cherries+=(LX_1724)
-         cherries+=(LAOS_190489)
-    if [ -z $cherries ]; then
+    unset cherries
+    local cherries=$(echo $(get_build_var PATH_CHERRIES))
+    if [ -z "${cherries}" ]; then
         echo -e "Nothing to cherry-pick!"
     else
-    	pathpick -a -i ${cherries[@]}
+        pathpick -a -i ${cherries}
     fi
+   unset cherries
 }
 
 function pathpick() {
@@ -68,7 +70,20 @@ function pathpick() {
     $(gettop)/vendor/google/build/tools/repopick.py -s auto $@
 }
 
+function flashboot()
+{
+    if [ ! -e "$OUT/boot.img" ];
+    then
+        echo "No boot.img found. Run make bootimage first."
+        return 1
+    fi
+    adb reboot-bootloader
+    fastboot flash boot $OUT/boot.img
+    fastboot reboot
+}
+
 export OUT_DIR=$(gettop)/out
+export WITH_CM_CHARGER=false
 export USE_CCACHE=1
 export CCACHE_DIR=.ccache
 prebuilts/misc/linux-x86/ccache/ccache -M 50G

@@ -1,2 +1,0 @@
-allow mediadrmserver kernel:system module_request;
-allow mediadrmserver rootfs:lnk_file getattr;
