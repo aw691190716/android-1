@@ -165,7 +165,6 @@ def write_data(args, header, off):
     file_prefix = args.output
     if file_prefix and file_prefix[-1]!='/':
         file_prefix += '/'
-    file_prefix += basename(args.input.name) + '-'
 
     if not exists(args.output):
         makedirs(args.output)

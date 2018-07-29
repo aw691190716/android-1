@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <remote  name="dotOS"
+           fetch="https://github.com/"
+	       review="https://gerrit.droidontime.com/"
+           revision="refs/heads/dot-o" />
+
+	<remote  name="los"
+           fetch="https://github.com/" 
+           revision="refs/heads/lineage-15.1" />
+
+  <project path="manifest" name="dotOS/manifest" remote="dotOS" />
+  <project path="build/make" name="dotOS/android_build" remote="dotOS" >
+    <copyfile src="core/root.mk" dest="Makefile" />
+    <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk" />
+    <linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default" />
+    <linkfile src="core" dest="build/core" />
+    <linkfile src="envsetup.sh" dest="build/envsetup.sh" />
+    <linkfile src="target" dest="build/target" />
+    <linkfile src="tools" dest="build/tools" />
+  </project>
+  <project path="build/kati" name="dotOS/android_build_kati" groups="pdk,tradefed" remote="dotOS" />
+  <project path="build/soong" name="dotOS/android_build_soong" groups="pdk,tradefed" remote="dotOS" >
+    <linkfile src="root.bp" dest="Android.bp" />
+    <linkfile src="bootstrap.bash" dest="bootstrap.bash" />
+  </project>
+
+  <project path="bionic" name="dotOS/android_bionic" groups="pdk" remote="dotOS" />
+  <project path="bootable/recovery" name="dotOS/android_bootable_recovery" groups="pdk" remote="dotOS" />
+  <project path="development" name="dotOS/android_development" groups="pdk-cw-fs,pdk-fs" remote="dotOS" />
+  <project path="external/chromium-webview" name="LineageOS/android_external_chromium-webview" groups="pdk" remote="los" clone-depth="1" />
+  <project path="external/wpa_supplicant_8" name="dotOS/android_external_wpa_supplicant_8" groups="pdk" remote="dotOS" />
+  <project path="frameworks/av" name="dotOS/android_frameworks_av" groups="pdk" remote="dotOS" />
+  <project path="frameworks/base" name="dotOS/android_frameworks_base" remote="dotOS" />
+  <project path="frameworks/native" name="dotOS/android_frameworks_native" groups="pdk" remote="dotOS" />
+  <project path="frameworks/opt/telephony" name="dotOS/android_frameworks_opt_telephony" groups="pdk" remote="dotOS" />
+  <project path="hardware/aosp/interfaces" name="dotOS/android_hardware_aosp_interfaces" remote="dotOS" >
+      <copyfile dest="hardware/aosp/Android.bp" src="Android.bp"/>
+  </project>
+  <project path="packages/apps/Bluetooth" name="dotOS/android_packages_apps_Bluetooth" groups="pdk-cw-fs,pdk-fs" remote="dotOS" />
+  <project path="packages/apps/Camera2" name="dotOS/android_packages_apps_Camera2" groups="pdk-fs" remote="dotOS" />
+  <project path="packages/apps/Contacts" name="dotOS/android_packages_apps_Contacts" groups="pdk-fs" remote="dotOS" />
+  <project path="packages/apps/DeskClock" name="dotOS/android_packages_apps_DeskClock" groups="pdk-fs" remote="dotOS" />
+  <project path="packages/apps/DocumentsUI" name="dotOS/android_packages_apps_DocumentsUI" groups="pdk-cw-fs,pdk-fs" remote="dotOS" />
+  <project path="packages/apps/DotExtras" name="dotOS/android_packages_apps_DotExtras" remote="dotOS" />
+  <project path="packages/apps/Dialer" name="dotOS/android_packages_apps_Dialer" groups="pdk-fs" remote="dotOS" />
+  <project path="packages/apps/DotUICenter" name="dotOS/android_packages_apps_DotUICenter" remote="dotOS" />
+  <project path="packages/apps/DotOTA" name="dotOS/android_packages_apps_DotOTA" remote="dotOS" />
+  <project path="packages/apps/ExactCalculator" name="dotOS/android_packages_apps_ExactCalculator" remote="dotOS" />
+  <project path="packages/apps/Messaging" name="dotOS/android_packages_apps_Messaging" groups="pdk-fs" remote="dotOS" />
+  <project path="packages/apps/FMRadio" name="dotOS/android_packages_apps_FMRadio" remote="dotOS" />
+  <project path="packages/apps/Gallery2" name="dotOS/android_packages_apps_Gallery2" groups="pdk-fs" remote="dotOS" />
+  <project path="packages/services/OmniJaws" name="dotOS/android_packages_services_OmniJaws" remote="dotOS" />
+  <project path="packages/apps/Recorder" name="dotOS/android_packages_apps_Recorder" remote="dotOS" />
+  <project path="packages/apps/Launcher3" name="dotOS/android_packages_apps_Launcher3" groups="pdk-fs" remote="dotOS" />
+  <project path="packages/apps/Snap" name="dotOS/android_packages_apps_Snap" groups="pdk-fs" remote="dotOS" />
+  <project path="packages/apps/Settings" name="dotOS/android_packages_apps_Settings" groups="pdk-fs" remote="dotOS" />
+  <project path="packages/inputmethods/LatinIME" name="dotOS/android_packages_inputmethods_LatinIME" groups="pdk-fs" remote="dotOS" />
+  <project path="packages/apps/PackageInstaller" name="dotOS/android_packages_apps_PackageInstaller" groups="pdk-cw-fs,pdk-fs" remote="dotOS" />
+  <project path="packages/apps/Stk" name="LineageOS/android_packages_apps_Stk" remote="los" />
+  <project path="packages/providers/MediaProvider" name="dotOS/android_packages_providers_MediaProvider" groups="pdk-cw-fs,pdk-fs" remote="dotOS" />
+  <project path="packages/providers/TelephonyProvider" name="dotOS/android_packages_providers_TelephonyProvider" groups="pdk-cw-fs,pdk-fs" remote="dotOS" />
+  <project path="packages/providers/DownloadProvider" name="dotOS/android_packages_providers_DownloadProvider" groups="pdk-cw-fs,pdk-fs" remote="dotOS" />
+  <project path="packages/services/Telephony" name="dotOS/android_packages_services_Telephony" groups="pdk-cw-fs,pdk-fs" remote="dotOS" />
+  <project path="packages/services/Telecomm" name="dotOS/android_packages_services_Telecomm" groups="pdk-cw-fs,pdk-fs" remote="dotOS" />
+  <project path="packages/apps/DUI" name="dotOS/platform_packages_apps_DUI" remote="dotOS" />
+  <project path="system/bt" name="dotOS/android_system_bt" groups="pdk" remote="dotOS" />
+  <project path="system/core" name="dotOS/android_system_core" groups="pdk" remote="dotOS" />
+  <project path="system/extras" name="dotOS/android_system_extras" groups="pdk" remote="dotOS" />
+  <project path="system/media" name="dotOS/android_system_media" groups="pdk" remote="dotOS" />
+  <project path="system/hardware/interfaces" name="dotOS/android_system_hardware_interfaces" groups="pdk" remote="dotOS" />
+  <project path="system/hwservicemanager" name="dotOS/android_system_hwservicemanager" groups="pdk" remote="dotOS" />
+  <project path="system/libhidl" name="dotOS/android_system_libhidl" groups="pdk" remote="dotOS" />
+  <project path="system/netd" name="dotOS/android_system_netd" groups="pdk" remote="dotOS" />
+  <project path="system/sepolicy" name="dotOS/android_system_sepolicy" groups="pdk" remote="dotOS" />
+  <project path="system/tools/dtbtool" name="LineageOS/android_system_tools_dtbtool" remote="los" />
+  <project path="system/vold" name="dotOS/android_system_vold" groups="pdk" remote="dotOS" />
+  <project path="vendor/dot" name="dotOS/android_vendor_dot" remote="dotOS" />
+  <project path="external/DUtils" name="dotOS/platform_external_DUtils" remote="dotOS" />
+
+  <!-- HardWare QCOM -->
+  <project path="hardware/qcom/audio/default" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" remote="los" />
+  <project path="hardware/qcom/audio-caf/apq8084" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" remote="los" revision="lineage-15.1-caf-8084" />
+  <project path="hardware/qcom/audio-caf/msm8916" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" remote="los" revision="lineage-15.1-caf-8916" />
+  <project path="hardware/qcom/audio-caf/msm8952" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" remote="los" revision="lineage-15.1-caf-8952" />
+  <project path="hardware/qcom/audio-caf/msm8960" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" remote="los" revision="lineage-15.1-caf-8960" />
+  <project path="hardware/qcom/audio-caf/msm8974" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" remote="los" revision="lineage-15.1-caf-8974" />
+  <project path="hardware/qcom/audio-caf/msm8994" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" remote="los" revision="lineage-15.1-caf-8994" />
+  <project path="hardware/qcom/audio-caf/msm8996" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" remote="los" revision="lineage-15.1-caf-8996" />
+  <project path="hardware/qcom/audio-caf/msm8998" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" remote="los" revision="lineage-15.1-caf-8998" />
+  <project path="hardware/qcom/display" name="LineageOS/android_hardware_qcom_display" groups="pdk,qcom,qcom_display" remote="los" />
+  <project path="hardware/qcom/display-caf/apq8084" name="LineageOS/android_hardware_qcom_display" groups="pdk,qcom,qcom_display" remote="los" revision="lineage-15.1-caf-8084" />
+  <project path="hardware/qcom/display-caf/msm8916" name="LineageOS/android_hardware_qcom_display" groups="pdk,qcom,qcom_display" remote="los" revision="lineage-15.1-caf-8916" />
+  <project path="hardware/qcom/display-caf/msm8952" name="LineageOS/android_hardware_qcom_display" groups="pdk,qcom,qcom_display" remote="los" revision="lineage-15.1-caf-8952" />
+  <project path="hardware/qcom/display-caf/msm8960" name="LineageOS/android_hardware_qcom_display" groups="pdk,qcom,qcom_display" remote="los" revision="lineage-15.1-caf-8960" />
+  <project path="hardware/qcom/display-caf/msm8974" name="LineageOS/android_hardware_qcom_display" groups="pdk,qcom,qcom_display" remote="los" revision="lineage-15.1-caf-8974" />
+  <project path="hardware/qcom/display-caf/msm8994" name="LineageOS/android_hardware_qcom_display" groups="pdk,qcom,qcom_display" remote="los" revision="lineage-15.1-caf-8994" />
+  <project path="hardware/qcom/display-caf/msm8996" name="LineageOS/android_hardware_qcom_display" groups="pdk,qcom,qcom_display" remote="los" revision="lineage-15.1-caf-8996" />
+  <project path="hardware/qcom/display-caf/msm8998" name="LineageOS/android_hardware_qcom_display" groups="pdk,qcom,qcom_display" remote="los" revision="lineage-15.1-caf-8998" />
+  <project path="hardware/qcom/media" name="LineageOS/android_hardware_qcom_media" groups="qcom" remote="los"/>
+  <project path="hardware/qcom/media-caf/apq8084" name="LineageOS/android_hardware_qcom_media" groups="qcom" remote="los" revision="lineage-15.1-caf-8084" />
+  <project path="hardware/qcom/media-caf/msm8916" name="LineageOS/android_hardware_qcom_media" groups="qcom" remote="los" revision="lineage-15.1-caf-8916" />
+  <project path="hardware/qcom/media-caf/msm8952" name="LineageOS/android_hardware_qcom_media" groups="qcom" remote="los" revision="lineage-15.1-caf-8952" />
+  <project path="hardware/qcom/media-caf/msm8960" name="LineageOS/android_hardware_qcom_media" groups="qcom" remote="los" revision="lineage-15.1-caf-8960" />
+  <project path="hardware/qcom/media-caf/msm8974" name="LineageOS/android_hardware_qcom_media" groups="qcom" remote="los" revision="lineage-15.1-caf-8974" />
+  <project path="hardware/qcom/media-caf/msm8994" name="LineageOS/android_hardware_qcom_media" groups="qcom" remote="los" revision="lineage-15.1-caf-8994" />
+  <project path="hardware/qcom/media-caf/msm8996" name="LineageOS/android_hardware_qcom_media" groups="qcom" remote="los" revision="lineage-15.1-caf-8996" />
+  <project path="hardware/qcom/media-caf/msm8998" name="LineageOS/android_hardware_qcom_media" groups="qcom" remote="los" revision="lineage-15.1-caf-8998" />
+
+  <project path="hardware/broadcom/libbt" name="LineageOS/android_hardware_broadcom_libbt" groups="pdk" remote="los" />
+  <project path="hardware/interfaces" name="dotOS/android_hardware_interfaces" groups="pdk" remote="dotOS" />
+  <project path="hardware/libhardware" name="LineageOS/android_hardware_libhardware" remote="los" />
+  <project path="hardware/libhardware_legacy" name="LineageOS/android_hardware_libhardware_legacy" groups="pdk" remote="los" />
+
+  <!-- Ant Wireless -->
+  <project path="external/ant-wireless/ant_native" name="LineageOS/android_external_ant-wireless_ant_native" remote="los" />
+  <project path="external/ant-wireless/ant_service" name="LineageOS/android_external_ant-wireless_ant_service" remote="los" />
+  <project path="external/ant-wireless/antradio-library" name="LineageOS/android_external_ant-wireless_antradio-library" remote="los" />
+
+  <!-- Device -->
+  <project path="device/qcom/common" name="LineageOS/android_device_qcom_common" remote="los" />
+  <project path="device/qcom/sepolicy" name="dotOS/android_device_qcom_sepolicy" remote="dotOS" />
+  <project path="device/aosp/sepolicy" name="dotOS/android_device_aosp_sepolicy" remote="dotOS" />
+
+  <!-- Packages -->
+  <project path="packages/apps/Nfc" name="LineageOS/android_packages_apps_Nfc" groups="apps_nfc,pdk-fs" remote="los" />
+
+  <!-- External -->
+  <project path="external/bash" name="LineageOS/android_external_bash" remote="los" />
+  <project path="external/brctl" name="LineageOS/android_external_brctl" remote="los" />
+  <project path="external/powertop" name="LineageOS/android_external_powertop" remote="los" />
+  <project path="external/connectivity" name="LineageOS/android_external_connectivity" groups="pdk" remote="los" />
+  <project path="external/ebtables" name="LineageOS/android_external_ebtables" groups="pdk" remote="los" />
+  <project path="external/exfat" name="LineageOS/android_external_exfat" remote="los" />
+  <project path="external/fuse" name="LineageOS/android_external_fuse" remote="los" />
+  <project path="external/f2fs-tools" name="LineageOS/android_external_f2fs-tools" remote="los" />
+  <project path="external/htop" name="LineageOS/android_external_htop" remote="los" />
+  <project path="external/json-c" name="LineageOS/android_external_json-c" remote="los" />
+  <project path="external/libncurses" name="LineageOS/android_external_libncurses" remote="los" />
+  <project path="external/libnfc-nxp" name="LineageOS/android_external_libnfc-nxp" remote="los" />
+  <project path="external/libtar" name="LineageOS/android_external_libtar" remote="los" />
+  <project path="external/mksh" name="LineageOS/android_external_mksh" groups="pdk" remote="los" />
+  <project path="external/nano" name="LineageOS/android_external_nano" remote="los" />
+  <project path="external/ntfs-3g" name="LineageOS/android_external_ntfs-3g" remote="los" />
+  <project path="external/p7zip" name="LineageOS/android_external_p7zip" remote="los" />
+  <project path="external/pigz" name="LineageOS/android_external_pigz" remote="los" />
+  <project path="external/rsync" name="LineageOS/android_external_rsync" remote="los" />
+  <project path="external/roboto-fonts" name="dotOS/android_external_roboto-fonts" remote="dotOS" />
+  <project path="external/unrar" name="LineageOS/android_external_unrar" remote="los" />
+  <project path="external/vim" name="LineageOS/android_external_vim" remote="los" />
+  <project path="external/zip" name="LineageOS/android_external_zip" remote="los" />
+  <project path="external/tinycompress" name="LineageOS/android_external_tinycompress" groups="pdk" remote="los" />
+  <project path="external/selinux" name="LineageOS/android_external_selinux" groups="pdk" remote="los" />
+  <project path="external/toybox" name="LineageOS/android_external_toybox" groups="pdk" remote="los" />
+
+  <!-- HALs -->
+  <project path="hardware/qcom/bootctrl" name="LineageOS/android_hardware_qcom_bootctrl" groups="pdk" remote="los" />
+  <project path="hardware/qcom/gps" name="LineageOS/android_hardware_qcom_gps" groups="qcom,qcom_gps" remote="los" />
+  <project path="hardware/qcom/keymaster" name="LineageOS/android_hardware_qcom_keymaster" groups="qcom,qcom_keymaster,pdk" remote="los" />
+  <project path="hardware/qcom/power" name="LineageOS/android_hardware_qcom_power" groups="qcom,pdk" remote="los" />
+  <project path="hardware/ril" name="LineageOS/android_hardware_ril" groups="pdk" remote="los" />
+  <project path="hardware/ril-caf" name="LineageOS/android_hardware_ril" groups="pdk" remote="los" revision="lineage-15.1-caf" />
+  <project path="system/nfc" name="LineageOS/android_system_nfc" groups="pdk" remote="los" />
+  <project path="system/update_engine" name="LineageOS/android_system_update_engine" groups="pdk" remote="los" />
+  <project path="hardware/qcom/bt" name="LineageOS/android_hardware_qcom_bt" groups="qcom" remote="los" />
+  <project path="hardware/qcom/bt-caf" name="LineageOS/android_hardware_qcom_bt" groups="qcom" remote="los" revision="lineage-15.1-caf" />
+  <project path="hardware/qcom/wlan" name="LineageOS/android_hardware_qcom_wlan" groups="qcom_wlan" remote="los" />
+  <project path="hardware/qcom/wlan-caf" name="LineageOS/android_hardware_qcom_wlan" groups="qcom_wlan" remote="los" revision="lineage-15.1-caf" />
+  <project path="hardware/qcom/fm" name="LineageOS/android_hardware_qcom_fm" remote="los" />
+  <project path="hardware/qcom/camera" name="LineageOS/android_hardware_qcom_camera" groups="qcom_camera" remote="los" />
+  <project path="vendor/codeaurora/telephony" name="LineageOS/android_vendor_codeaurora_telephony" remote="los" />
+  <project path="vendor/qcom/opensource/cryptfs_hw" name="LineageOS/android_vendor_qcom_opensource_cryptfs_hw" remote="los" />
+  <project path="vendor/qcom/opensource/dataservices" name="LineageOS/android_vendor_qcom_opensource_dataservices" remote="los" />
+  <!--project path="vendor/qcom/opensource/dpm" name="LineageOS/android_vendor_qcom_opensource_dpm" remote="los" />-->
+  <project path="vendor/qcom/opensource/interfaces" name="LineageOS/android_vendor_qcom_opensource_interfaces" remote="los" >
+    <copyfile dest="vendor/qcom/opensource/Android.bp" src="os_pickup.bp"/>
+  </project>
+  <project path="vendor/qcom/opensource/rcs-service" name="LineageOS/android_vendor_qcom_opensource_rcs-service" remote="los" />
+
+  <!-- NXP NFC -->
+  <project path="vendor/nxp/interfaces/opensource/nfc" name="LineageOS/android_vendor_nxp_interfaces_opensource_nfc" remote="los" >
+    <linkfile dest="vendor/nxp/interfaces/Android.bp" src="prop_pickup.bp"/>
+  </project>
+  <project path="vendor/nxp/opensource/external/libnfc-nci" name="LineageOS/android_vendor_nxp_opensource_external_libnfc-nci" remote="los" />
+  <project path="vendor/nxp/opensource/frameworks" name="LineageOS/android_vendor_nxp_opensource_frameworks" remote="los" />
+  <project path="vendor/nxp/opensource/packages/apps/Nfc" name="LineageOS/android_vendor_nxp_opensource_packages_apps_Nfc" remote="los" />
+
+  <!-- device dependencies -->
+  <project path="system/qcom" name="LineageOS/android_system_qcom" groups="qcom" remote="los" />
+  <project path="packages/resources/devicesettings" name="LineageOS/android_packages_resources_devicesettings" remote="los" />
+</manifest> 

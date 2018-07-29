@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+    <remote name="OpenKirin"
+            fetch="https://github.com"
+            review="https://review.lineageos.org"
+            revision="refs/heads/8.1"
+            sync-c="true"
+            sync-j="4" />
+
+    <project path="vendor/huawei/alice" name="OpenKirin/android_vendor_huawei_alice" remote="OpenKirin" />
+    <project path="device/huawei/alice" name="OpenKirin/android_device_huawei_alice" remote="OpenKirin" />
+    <project path="kernel/huawei/alice" name="OpenKirin/android_kernel_huawei_hi6210sft" remote="OpenKirin" revision="oreo" />
+
+</manifest>

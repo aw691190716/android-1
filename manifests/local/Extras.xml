@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+    <remote name="extras"
+            fetch="https://github.com"
+            revision="refs/tags/android-7.1.1_r28"
+            sync-c="true"
+            sync-j="4" />
+
+    <project name="aw691190716/android_vendor_extras" path="vendor/google" remote="extras" >
+
+    </project>
+</manifest>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+<!--
+    <include name="local_manifests/local/Remove_ResurrectionRemix.xml" />
+    <include name="local_manifests/local/ResurrectionRemix.xml" />
+    <include name="local_manifests/local/vendor_rr.xml" /> -->
+    <include name="local_manifests/local/OpenKirin.xml" />
+    <include name="local_manifests/local/Extras.xml" />
+    <remove-project name="platform/external/chromium-webview" />
+    <project path="external/chromium-webview" name="LineageOS/android_external_chromium-webview" groups="pdk" clone-depth="1" />
+</manifest>

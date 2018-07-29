@@ -19,10 +19,10 @@ function mka() {
     if [ "$T" ]; then
         case `uname -s` in
             Darwin)
-                make -C $T -j `sysctl hw.ncpu|cut -d" " -f2` "$@"
+                make -j `sysctl hw.ncpu|cut -d" " -f2` "$@"
                 ;;
             *)
-                make -C $T -j$(grep "^processor" /proc/cpuinfo | wc -l) "$@"
+                make -j$(grep "^processor" /proc/cpuinfo | wc -l) "$@"
                 ;;
         esac
 
@@ -51,7 +51,8 @@ function build() {
 
 function buildshutdown() {
     build $@
-    shutdown -h +5
+    PASSWORD=android
+    echo $PASSWORD | sudo -S shutdown -h +5
 }
 
 function applypath() {
@@ -82,13 +83,47 @@ function flashboot()
     fastboot reboot
 }
 
+export LC_ALL=C
+export CCACHE_DIR=~/.ccache
 export OUT_DIR=$(gettop)/out
 export WITH_CM_CHARGER=false
 export USE_CCACHE=1
-export CCACHE_DIR=.ccache
+if [ -z "${CCACHE_DIR}" ]; then
+   export CCACHE_DIR=.ccache
+fi
+export CCACHE_COMPRESS=1
 prebuilts/misc/linux-x86/ccache/ccache -M 50G
 
 # Android specific JACK args
 if [ -n "$JACK_SERVER_VM_ARGUMENTS" ] && [ -z "$ANDROID_JACK_VM_ARGS" ]; then
     export ANDROID_JACK_VM_ARGS=$JACK_SERVER_VM_ARGUMENTS
 fi
+
+if [ -z "$ANDROID_JACK_VM_ARGS" ]; then
+    export ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4096m"
+fi
+
+vendor_rom=''
+venv="/build/envsetup.sh"
+for envf in `test -d vendor && find -L vendor -maxdepth 4 -name 'envsetup.sh' 2> /dev/null | sort`
+do
+	if [ -n "$vendor_rom" ]; then
+		echo "warning... $vendor_rom ..."
+	fi
+    vendordir=${envf/%${venv}/''}
+    if [ -n "$vendordir" ] && [ x"$vendordir" != x"$envf" ]; then
+    	vendor_rom=$vendordir
+    fi
+done
+unset vendordir
+unset venv
+unset envf
+
+if [ -n "$vendor_rom" ]; then
+	export VENDOR_ROM=$vendor_rom
+    if [ -f "$(gettop)/$vendor_rom/CHANGELOG.mkdn" ]; then
+    	cp -f $(gettop)/$vendor_rom/CHANGELOG.mkdn $(gettop)/
+    fi
+fi
+
+#export ALLOW_MISSING_DEPENDENCIES=true

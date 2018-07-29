@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+    <remote name="Hak86"
+            fetch="https://github.com"
+            review="https://review.lineageos.org"
+            revision="refs/heads/aosp-8.x"
+            sync-c="true"
+            sync-j="4" />
+
+    <project path="vendor/huawei/alice" name="hak86/android_vendor_huawei_alice" remote="Hak86" />
+    <project path="device/huawei/alice" name="hak86/android_device_huawei_alice" remote="Hak86" />
+    <project path="kernel/huawei/alice" name="hak86/android_kernel_huawei_hi6210sft" remote="Hak86" revision="8.x" />
+
+</manifest>

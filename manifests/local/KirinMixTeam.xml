@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+    <remote name="KirinMixTeam"
+            fetch="https://github.com"
+            sync-c="true"
+            sync-j="4" />
+
+    <project path="device/huawei/hi6210sft" name="KirinMixTeam/android_device_huawei_hi6210sft" remote="KirinMixTeam" revision="dotOS" />
+
+</manifest>

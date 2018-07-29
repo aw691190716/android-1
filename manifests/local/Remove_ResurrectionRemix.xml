@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <remove-project name="android_build" />
+  <remove-project name="device_rr_sepolicy" />
+  <remove-project name="device_qcom_sepolicy" />
+  <remove-project name="external_DUtils" />
+  <remove-project name="frameworks_native" />
+  <remove-project name="frameworks_opt_slimrecent" />
+  <remove-project name="lineage-sdk" />
+  <remove-project name="packages_apps_DUI" />
+  <remove-project name="packages_apps_ResurrectionOTA" />
+  <remove-project name="android_packages_apps_OmniStyle" />
+  <remove-project name="android_packages_services_Telecomm" />
+  <remove-project name="android_packages_services_Telephony" />
+  <remove-project name="packages_services_OmniJaws" />
+  <remove-project name="packages_apps_LineageParts" />
+  <remove-project name="android_packages_overlays_Resurrection" />
+  <remove-project name="system_core" />
+  <remove-project name="android_system_sepolicy" />
+  <remove-project name="ResurrectionRemix/android_vendor_resurrection" />
+</manifest>
